@@ -58,19 +58,23 @@
       connect: function(cb){
         var _this = this;
         this.database = new Database();
+        this.connection = {};
         //connect to message queue
-        this.connection = new amqp.createConnection({url: config.amqp.url});
-        this.connection.on('ready', function(){
+        this.connection.producer = new amqp.createConnection({url: config.amqp.url.producer});
+        this.connection.consumer = new amqp.createConnection({url: config.amqp.url.consumer});
+        this.connection.producer.on('ready', function(){
           //get the response exchange
-          _this.connection.exchange(config.amqp.resexchange, {type: 'direct', durable: true, autoDelete: false
+          _this.connection.producer.exchange(config.amqp.resexchange, {type: 'direct', durable: true, autoDelete: false
           }, function(x){
             _this.resx = x;
           });
+        });
+        this.connection.consumer.on('ready', function(){
           //get the request exchange
-          _this.connection.exchange(config.amqp.reqexchange, {type: 'direct', durable: true, autoDelete: false
+          _this.connection.consumer.exchange(config.amqp.reqexchange, {type: 'direct', durable: true, autoDelete: false
           }, function(x){
             //establish the queue
-            _this.connection.queue('', {exclusive: true}, function(q){
+            _this.connection.consumer.queue('', {exclusive: true}, function(q){
               _(['clog', 'clogs', 'reply', 'merge', 'unclog', 'create']).each(function(req){
                 q.bind(x, 'api.' + req);
               });
@@ -117,7 +121,8 @@
         return target;
       },
       close: function(){
-        this.connection.end();
+        this.connection.consumer.end();
+        this.connection.producer.end();
       }
     }
     return Backend;
