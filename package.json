@@ -20,7 +20,10 @@
     "test": "mocha",
     "start": "node server.js"
   },
-  "repository": "https://bitbucket.org/csolar/clogger.api",
+  "repository": {
+    "type": "git",
+    "https://github.com/csolar/clogger.api.git"
+  },
   "keywords": [
     "api",
     "clogger"
