@@ -1,0 +1,29 @@
+{
+  "name": "clogger.api",
+  "version": "0.0.1",
+  "description": "an API for Clogger",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "restify": "~2.6.1",
+    "amqp": "~0.1.8",
+    "node-uuid": "~1.4.1",
+    "underscore": "~1.4.4"
+  },
+  "devDependencies": {
+    "chai": "~1.5.0",
+    "mocha": "~1.16.2"
+  },
+  "scripts": {
+    "test": "mocha",
+    "start": "node server.js"
+  },
+  "repository": "https://bitbucket.org/csolar/clogger.api",
+  "keywords": [
+    "api",
+    "clogger"
+  ],
+  "author": "Cristiano Solarino"
+}

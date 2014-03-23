@@ -1,0 +1,45 @@
+- public restful API
+- API must be versioned
+- API must be self documenting
+- API should be easy to build and deploy
+
+- API should be database agnostic
+-- API uses message queue.
+-- workers can be implemented that use any DB desired.
+- API should log/measure everything
+
+--- get message stream
+--- add message
+--- add tag/label
+--- delete message
+--- delete tag/label
+--- search
+--- filter
+
+
+- messages should be short: 150 characters
+- ability to attach lables/tags for context
+- main label/tag should be shown prominently together with the message
+- allow replies (threads)
+- messages should be searcheable 
+-- use elasticsearch
+- messages should be filterable (only show messages with label x, only show messages from user y)
+-- for non stream filtering use elasticsearch 
+
+{
+  'id': numeric
+  'timestamp': datetime
+  'user_id': numeric  
+  'tag': string
+  'message': string max 150 chars
+  'parent': numeric (if specified this message is a reply to the message with id = parent)
+  'children': array (array of ids of messages that are replies to this message)
+}
+
+- code should be supported 
+-- syntax highlight
+-- label specifies the language
+
+- log/measure everything
+-- use elastic search 
+

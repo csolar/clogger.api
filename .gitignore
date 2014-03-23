@@ -1,0 +1,4 @@
+node_modules/*
+.hgignore
+.hg/
+blueprint.md
