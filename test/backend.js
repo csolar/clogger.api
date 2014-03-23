@@ -60,8 +60,8 @@
         this.database = new Database();
         this.connection = {};
         //connect to message queue
-        this.connection.producer = new amqp.createConnection({url: config.amqp.url.producer});
-        this.connection.consumer = new amqp.createConnection({url: config.amqp.url.consumer});
+        this.connection.producer = new amqp.createConnection({url: config.amqp.url.produce});
+        this.connection.consumer = new amqp.createConnection({url: config.amqp.url.consume});
         this.connection.producer.on('ready', function(){
           //get the response exchange
           _this.connection.producer.exchange(config.amqp.resexchange, {type: 'direct', durable: true, autoDelete: false
