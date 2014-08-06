@@ -14,7 +14,7 @@
   exports.api = {
     version: 'v0.0.1',
     url: 'http://api.clogger.com',
-    testurl: 'http://localhost:8080',
+    testurl: process.env.CLOGGER_API_TEST_SERVER || 'http://localhost:8080',
     debug: true
   }
 }).call(this);
