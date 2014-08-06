@@ -3,7 +3,7 @@ var expect  = require('chai').expect,
     config  = require('../config'),
     restify = require('restify'),
     backend = require('./backend'),
-    client  = restify.createJsonClient({url: config.api.testurl});
+    client  = restify.createJsonClient({url: config.api.test_server_prot + '://' + config.api.test_server_host + ':' + config.api.test_server_port});
 
 describe('clogger API', function(){
   var response,
@@ -25,9 +25,13 @@ describe('clogger API', function(){
       };
 
   before(function(done){
-    backend.connect(function(){
-      done();
-    });
+    //start the api
+    var server = require('../server');
+    setTimeout(function(){
+      backend.connect(function(){
+        done();
+      });
+    }, 1000);
   });
   after(function(){
     backend.close();
